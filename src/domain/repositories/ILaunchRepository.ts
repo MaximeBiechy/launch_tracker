@@ -3,4 +3,5 @@ import {LaunchAPIService} from "../../infrastructure/services/LaunchAPIService";
 
 export interface ILaunchRepository {
     getAllLaunches() : Promise<Launch[]>;
+    getAllUpcomingLaunches(): Promise<Launch[]>;
 }
