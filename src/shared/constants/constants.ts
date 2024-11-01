@@ -1,0 +1,1 @@
+export const BASE_API_URL =  'https://ll.thespacedevs.com/2.3.0';
