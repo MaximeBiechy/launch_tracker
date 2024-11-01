@@ -1,6 +1,6 @@
 import { Launch } from "../../domain/entities/Launch";
 
-export class LaunchMapper {
+export class LaunchPresenter {
     static toEntity(apiLaunchData: any): Launch {
         return {
             id: apiLaunchData.id,
