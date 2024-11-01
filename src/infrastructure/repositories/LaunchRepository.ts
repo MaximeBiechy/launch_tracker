@@ -1,11 +1,12 @@
 import {ILaunchRepository} from "../../domain/repositories/ILaunchRepository";
 import {Launch} from "../../domain/entities/Launch";
 import {LaunchAPIService} from "../services/LaunchAPIService";
+import {ILaunchAPIService} from "../../domain/repositories/ILaunchAPIService";
 
 export class LaunchRepository implements ILaunchRepository {
-    private launchAPIService: LaunchAPIService;
+    private launchAPIService: ILaunchAPIService;
 
-    constructor(launchAPIService: LaunchAPIService) {
+    constructor(launchAPIService: ILaunchAPIService) {
         this.launchAPIService = launchAPIService;
     }
 
