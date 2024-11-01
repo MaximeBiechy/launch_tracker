@@ -17,4 +17,8 @@ export class LaunchRepository implements ILaunchRepository {
         return await this.launchAPIService.getAllUpcomingLaunches();
     }
 
+    async getLaunch(id: string): Promise<Launch> {
+        return await this.launchAPIService.getLaunch(id);
+    }
+
 }

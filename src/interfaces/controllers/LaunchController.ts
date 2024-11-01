@@ -1,16 +1,16 @@
-import { Request, Response } from 'express';
-import {GetAllLaunches} from "../../domain/usecases/GetAllLaunches";
+import {Request, Response} from 'express';
+import {GetLaunch} from "../../domain/usecases/GetLaunch";
 
 export class LaunchController {
-    constructor(public getAllLaunches: GetAllLaunches) {}
+    constructor(public getLaunch: GetLaunch) {
+    }
 
-    async fetchAllLaunches(req: Request, res: Response) {
+    async fetchLaunch(req: Request, res: Response) {
         try {
-            const launches = await this.getAllLaunches.execute();
-            res.status(200).json(launches);
+            const launch = await this.getLaunch.execute(req.params.id);
+            res.status(200).json(launch);
         } catch (error) {
-            res.status(500).json({ error: 'Failed to fetch launches' });
+            res.status(500).json({error: 'Failed to fetch launch'});
         }
     }
-    
 }

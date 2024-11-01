@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, {Request, Response} from 'express';
 import launchRoutes from "./routes/launchRoutes";
 
 const app = express();
