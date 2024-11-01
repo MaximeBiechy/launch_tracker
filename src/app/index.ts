@@ -1,8 +1,9 @@
 import express, {Request, Response} from 'express';
 import launchRoutes from "./routes/launchRoutes";
+import {APP_CONFIG} from "../shared/config/config";
 
 const app = express();
-const PORT = process.env.PORT || 3000
+const PORT = APP_CONFIG.port;
 
 app.use(express.json());
 app.use('/api', launchRoutes);
