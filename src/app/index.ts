@@ -1,10 +1,14 @@
 import express, {Request, Response} from 'express';
+import cors from 'cors';
 import launchRoutes from "./routes/launchRoutes";
 import {APP_CONFIG} from "../shared/config/config";
 
 const app = express();
 const PORT = APP_CONFIG.port;
 
+app.use(cors({
+    origin: 'http://localhost:8080',
+}));
 app.use(express.json());
 app.use('/api', launchRoutes);
 
