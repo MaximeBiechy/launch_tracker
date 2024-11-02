@@ -38,6 +38,7 @@ Launch Tracker est une application web full stack qui permet de répertorier tou
 
    ```plaintext
    PORT=3000
+   VUE_APP_API_URL=http://localhost:3000/api
    ```
   
 4. **Construire et exécuter l'application avec Docker**
