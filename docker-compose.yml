@@ -13,3 +13,14 @@ services:
       - .:/app
       - /app/node_modules
     command: npx nodemon src/app/index.ts
+
+  frontend:
+    build:
+      context: ./frontend/launcher_tracker
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/launcher_tracker:/app
+      - /app/node_modules
+    ports:
+      - "8080:80"
+    command: npm run serve
