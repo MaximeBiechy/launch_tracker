@@ -51,7 +51,7 @@ Launch Tracker est une application web full stack qui permet de répertorier tou
 
    Cette commande va :
 
-   - Construire l'image Docker définie dans le `Dockerfile`.
+   - Construire les images Docker définie dans les `Dockerfile`.
    - Démarrer les conteneurs définis dans le fichier `docker-compose.yml`.
 
 5. **Accéder à l'application**
@@ -59,7 +59,7 @@ Launch Tracker est une application web full stack qui permet de répertorier tou
    Une fois que les conteneurs sont en cours d'exécution, ouvrez votre navigateur web et accédez à :
 
    ```plaintext
-   http://localhost:3000
+   http://localhost:8080
    ```
 
    Cela affichera votre application de suivi des lancements de fusées.
