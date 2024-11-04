@@ -1,10 +1,10 @@
-# Étape 1 : Construire l'application
-FROM node:18 AS build
+# Utilisez une image Node.js
+FROM node:alpine
 
-# Définir le répertoire de travail
+# Créer le dossier de l'application
 WORKDIR /app
 
-# Copier les fichiers package.json et package-lock.json
+# Copier les fichiers de package
 COPY package*.json ./
 
 # Installer les dépendances
@@ -13,17 +13,8 @@ RUN npm install
 # Copier le reste de l'application
 COPY . .
 
-# Construire l'application pour la production
-RUN npm run build
+# Exposez le port utilisé par le serveur de développement
+EXPOSE 8080
 
-# Étape 2 : Servir l'application avec Nginx
-FROM nginx:alpine
-
-# Copier les fichiers construits dans le répertoire de Nginx
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Exposer le port sur lequel Nginx va écouter
-EXPOSE 80
-
-# Commande par défaut pour démarrer Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Commande pour démarrer le serveur de développement
+CMD ["npm", "run", "serve"]

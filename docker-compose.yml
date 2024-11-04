@@ -22,5 +22,5 @@ services:
       - ./frontend/launcher_tracker:/app
       - /app/node_modules
     ports:
-      - "8080:80"
+      - "8080:8080"
     command: npm run serve
