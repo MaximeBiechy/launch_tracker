@@ -6,6 +6,12 @@ export class GetLaunch {
     }
 
     async execute(id: string): Promise<Launch> {
-        return await this.launchRepository.getLaunch(id);
+        const launch = await this.launchRepository.getLaunch(id);
+
+        if (!launch) {
+            throw new Error('Launch not found');
+        }
+
+        return launch;
     }
 }

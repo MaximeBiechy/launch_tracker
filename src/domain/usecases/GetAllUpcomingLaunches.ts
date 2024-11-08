@@ -6,6 +6,12 @@ export class GetAllUpcomingLaunches {
     }
 
     async execute(): Promise<Launch[]> {
-        return this.launchRepository.getAllUpcomingLaunches();
+        const launches = await this.launchRepository.getAllUpcomingLaunches();
+
+        if (!launches || launches.length === 0) {
+            throw new Error('No launches found');
+        }
+
+        return launches;
     }
 }

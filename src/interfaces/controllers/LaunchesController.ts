@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import {GetAllLaunches} from "../../domain/usecases/GetAllLaunches";
+import {NotFoundError} from "../../domain/exceptions/NotFoundError";
+import {ExternalAPIError} from "../../domain/exceptions/ExternalAPIError";
 
 export class LaunchesController {
     constructor(public getAllLaunches: GetAllLaunches) {}
@@ -9,7 +11,13 @@ export class LaunchesController {
             const launches = await this.getAllLaunches.execute();
             res.status(200).json(launches);
         } catch (error) {
-            res.status(500).json({ error: 'Failed to fetch launches' });
+            if (error instanceof NotFoundError) {
+                res.status(404).json({message: error.message});
+            } else if (error instanceof ExternalAPIError) {
+                res.status(502).json({message: error.message});
+            } else {
+                res.status(500).json({message: 'Internal server error'});
+            }
         }
     }
 
