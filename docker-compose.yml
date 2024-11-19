@@ -13,6 +13,8 @@ services:
       - .:/app
       - /app/node_modules
     command: npx nodemon src/app/index.ts
+    networks:
+      - app-network
 
   frontend:
     build:
@@ -24,3 +26,8 @@ services:
     ports:
       - "8080:8080"
     command: npm run serve
+    networks:
+      - app-network
+
+networks:
+  app-network:
