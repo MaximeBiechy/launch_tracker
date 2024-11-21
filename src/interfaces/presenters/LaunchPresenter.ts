@@ -6,7 +6,11 @@ export class LaunchPresenter {
             id: apiLaunchData.id,
             name: apiLaunchData.name,
             date: apiLaunchData.net,
-            image_url: apiLaunchData.image?.image_url || null
+            image_url: apiLaunchData.image?.image_url || null,
+            agencies: apiLaunchData.mission.agencies?.map((agency: any) => ({
+                id: agency.id,
+                name: agency.name
+            })) || [],
         };
     }
 
