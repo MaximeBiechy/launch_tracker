@@ -11,7 +11,7 @@ export class LaunchAPIService implements ILaunchRepository {
 
     async getAllLaunches(): Promise<Launch[]> {
         try {
-            const response = await axios.get<LaunchAPIResponse>(`${BASE_API_URL}/launches/?ordering=-last_updated`);
+            const response = await axios.get<LaunchAPIResponse>(`${BASE_API_URL}/launches/?ordering=net`);
             return LaunchPresenter.toEntities(response.data.results);
         } catch (error: any) {
             this.handleError(error);
@@ -20,7 +20,8 @@ export class LaunchAPIService implements ILaunchRepository {
 
     async getAllUpcomingLaunches(): Promise<Launch[]> {
         try {
-            const response = await axios.get<LaunchAPIResponse>(`${BASE_API_URL}/launches/upcoming`);
+            const limit = 20;
+            const response = await axios.get<LaunchAPIResponse>(`${BASE_API_URL}/launches/upcoming/?limit=${limit}`);
             return LaunchPresenter.toEntities(response.data.results);
         } catch (error: any) {
             this.handleError(error);
@@ -38,13 +39,25 @@ export class LaunchAPIService implements ILaunchRepository {
 
     private handleError(error: any): never {
         if (error.response) {
-            if (error.response.status === 404) {
+            const status = error.response.status;
+
+            if (status === 404) {
                 throw new NotFoundError('Launch not found : ' + error.message);
+            } else if (status === 429) {
+                const retryAfter = error.response.headers['retry-after']; // Nombre de secondes à attendre
+                throw new ExternalAPIError(
+                    retryAfter
+                        ? `Trop de requêtes envoyées. Réessayez dans ${retryAfter} secondes.`
+                        : "Trop de requêtes envoyées. Réessayez plus tard."
+                );
             } else {
-                throw new ExternalAPIError(`API error : ${error.message}`);
+                throw new ExternalAPIError(`API error : ${error.response.statusText}`);
             }
+        } else if (error.request) {
+            throw new Error(`Aucune réponse du serveur. Vérifiez votre connexion.`);
         } else {
-            throw new Error(`Failed to reach API: ${error.message}`);
+            throw new Error(`Erreur inattendue : ${error.message}`);
         }
     }
+
 }

@@ -4,6 +4,10 @@ module.exports = {
     darkMode: false, // or 'media' or 'class'
     theme: {
         extend: {
+            fontFamily: {
+              krona: ['Krona One', 'sans-serif'],
+              gowun: ['Gowun Batang', 'sans-serif'],
+            },
             colors: {
                 dark: '#151515',
                 dark_card: '#222',
