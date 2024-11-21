@@ -1,13 +1,7 @@
 <template>
   <div>
     <!-- ! Header -->
-    <header class="flex justify-between items-center h-20 w-full px-20 border-2 border-white">
-      <h1 class="text-white text-2xl font-krona">Launch Tracker</h1>
-      <nav class="text-2xl flex gap-6">
-        <router-link to="/" class="text-white font-krona">Home</router-link>
-        <router-link to="/passed-launches" class="text-white font-krona">Passed</router-link>
-      </nav>
-    </header>
+    <HeaderComponent />
 
     <!-- ! Page title-->
     <h1 class="text-center text-4xl text-white m-14 font-krona">Upcoming Launches</h1>
@@ -23,9 +17,9 @@
           <h2 class="text-xl font-krona text-center">{{ launch.name }}</h2>
           <p class="text-2xl font-gowun">{{ launch.agencies[0]?.name || 'No agency' }}</p>
           <p class="text-2xl font-gowun">{{ launch.date }}</p>
-          <button class="text-white text-2xl border-white border py-4 px-10 rounded-lg bg-dark_card font-gowun">See
+          <RouterLink :to="'/launch/' + launch.id" class="text-white text-2xl border-white border py-4 px-10 rounded-lg bg-dark_card font-gowun">See
             More
-          </button>
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -36,9 +30,11 @@
 import {onMounted, ref} from 'vue';
 import {getUpcomingLaunches} from "../services/launchService.ts";
 import {formatDate} from "../utils/dateFormatter.ts";
+import HeaderComponent from "../../components/Header.vue";
 
 export default {
   name: 'HomePage',
+  components: {HeaderComponent},
   setup() {
     const launches = ref([]);
     const loading = ref(true);
