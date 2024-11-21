@@ -1,5 +1,5 @@
 # Utilisez une image Node.js
-FROM node:alpine
+FROM node:20-alpine
 
 # Créer le dossier de l'application
 WORKDIR /app
