@@ -1,4 +1,5 @@
 import { Launch } from "../../domain/entities/Launch";
+import {AgencyPresenter} from "./AgencyPresenter";
 
 export class LaunchPresenter {
     static toEntity(apiLaunchData: any): Launch {
@@ -7,10 +8,8 @@ export class LaunchPresenter {
             name: apiLaunchData.name,
             date: apiLaunchData.net,
             image_url: apiLaunchData.image?.image_url || null,
-            agencies: apiLaunchData.mission.agencies?.map((agency: any) => ({
-                id: agency.id,
-                name: agency.name
-            })) || [],
+            thumbnail_url: apiLaunchData.image?.thumbnail_url || null,
+            agency: AgencyPresenter.toEntity(apiLaunchData.launch_service_provider),
         };
     }
 
