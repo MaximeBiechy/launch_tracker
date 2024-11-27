@@ -1,14 +1,11 @@
 export interface LaunchAPIResponse {
-    id: string;
-    name: string;
-    net: string;
-    image: any;
-    results: Array<{
+    results: {
         id: string;
         name: string;
         net: string;
         image: {
-            image_url: string;
+            image_url?: string;
+            thumbnail_url?: string;
         };
-    }>;
+    }[];
 }
