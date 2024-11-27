@@ -15,7 +15,7 @@ export class UpcomingLaunchController {
             if (error instanceof NotFoundError) {
                 res.status(404).json({message: error.message});
             } else if (error instanceof ExternalAPIError) {
-                res.status(502).json({message: error.message});
+                res.status(429).json({message: error.message});
             } else {
                 res.status(500).json({message: 'Internal server error'});
             }
