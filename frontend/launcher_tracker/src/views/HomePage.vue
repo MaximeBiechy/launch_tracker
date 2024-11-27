@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- ! Header -->
-    <HeaderComponent />
+    <HeaderComponent/>
 
     <!-- ! Page title-->
     <h1 class="text-center text-4xl text-white m-14 font-krona">Upcoming Launches</h1>
@@ -11,13 +11,14 @@
     <div v-if="error" class="text-white">{{ error }}</div>
     <div v-else class="mx-auto flex items-center flex-col gap-5 w-[800px]">
       <div v-for="launch in launches" :key="launch.id" class="flex content-between bg-dark_card rounded-lg h-72 w-full">
-        <img :src="launch.image_url" alt="Image de la fusée"
+        <img :src="launch?.thumbnail_url" alt="image of the rocket"
              class="h-auto w-64 rounded-l-lg object-cover object-center"/>
-        <div class="flex items-center justify-evenly flex-col w-full h-full text-white">
-          <h2 class="text-xl font-krona text-center">{{ launch.name }}</h2>
-          <p class="text-2xl font-gowun">{{ launch.agencies[0]?.name || 'No agency' }}</p>
-          <p class="text-2xl font-gowun">{{ launch.date }}</p>
-          <RouterLink :to="'/launch/' + launch.id" class="text-white text-2xl border-white border py-4 px-10 rounded-lg bg-dark_card font-gowun">See
+        <div class="flex items-center justify-evenly flex-col w-full h-full text-white text-center">
+          <h3 class="text-xl font-krona">{{ launch.name }}</h3>
+          <h2 class="text-2xl font-gowun">{{ launch.agency.name || 'No agency' }}</h2>
+          <h2 class="text-2xl font-gowun">{{ launch.date }}</h2>
+          <RouterLink :to="'/launch/' + launch.id"
+                      class="text-white text-2xl border-white border py-4 px-10 rounded-lg bg-dark_card font-gowun">See
             More
           </RouterLink>
         </div>
@@ -66,5 +67,5 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
 </style>
