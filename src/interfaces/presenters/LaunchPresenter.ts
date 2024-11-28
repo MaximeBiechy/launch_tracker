@@ -8,7 +8,7 @@ export class LaunchPresenter {
             name: apiLaunchData.name,
             date: apiLaunchData.net,
             image_url: apiLaunchData.image?.image_url || null,
-            thumbnail_url: apiLaunchData.image?.thumbnail_url || null,
+            thumbnail_url: apiLaunchData.image?.thumbnail_url || 'https://upload.wikimedia.org/wikipedia/commons/6/63/KIPP_Rocket_Launch_1.jpg',
             agency: AgencyPresenter.toEntity(apiLaunchData.launch_service_provider),
         };
     }
