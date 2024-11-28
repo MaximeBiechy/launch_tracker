@@ -7,12 +7,12 @@
     <button @click="goBack" class="text-xs">&#x2B8C; BACK TO LAUNCHES</button>
     <h2 class="text-3xl font-krona">{{ launch?.name }}</h2>
   </div>
-  <div v-if="loading" class="text-white">loading...</div>
-  <div v-if="error" class="text-white">{{ error }}</div>
+  <div v-if="loading" class="text-white text-center">loading...</div>
+  <div v-if="error" class="text-white text-center">{{ error }}</div>
   <div v-else class="flex flex-col mx-auto items-center gap-5 w-[800px]">
     <div class="flex content-between bg-dark_card rounded-lg h-72 w-full">
       <img :src="launch?.thumbnail_url" alt="image of the rocket"
-           class="h-auto w-64 rounded-l-lg object-cover object-center">
+           class="h-auto w-64 min-w-64 rounded-l-lg object-cover object-center">
       <div class="flex items-center justify-evenly flex-col w-full h-full text-white text-center">
         <h3 class="text-xl font-krona">
           {{ launch?.name }}
