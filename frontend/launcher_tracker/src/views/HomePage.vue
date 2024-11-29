@@ -7,9 +7,11 @@
     <h1 class="text-center text-4xl text-white m-14 font-krona">Upcoming Launches</h1>
 
     <!-- ! Main Content -->
-    <div v-if="loading" class="text-white text-center">loading launches...</div>
+    <div v-if="loading" class="flex items-center justify-center">
+      <LoadingSpinner></LoadingSpinner>
+    </div>
     <div v-if="error" class="text-white text-center">{{ error }}</div>
-    <div v-else class="mx-auto flex items-center flex-col gap-5 w-[800px]">
+    <div v-else-if="!loading" class="mx-auto flex items-center flex-col gap-5 w-[800px]">
       <div v-for="launch in launches" :key="launch.id" class="flex content-between bg-dark_card rounded-lg h-72 w-full">
         <img :src="launch?.thumbnail_url" alt="image of the rocket"
              class="h-auto w-64 min-w-64 rounded-l-lg object-cover object-center"/>
@@ -27,44 +29,32 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import {onMounted, ref} from 'vue';
 import {getUpcomingLaunches} from "../services/launchService.ts";
 import {formatDate} from "../utils/dateFormatter.ts";
-import HeaderComponent from "../../components/Header.vue";
+import HeaderComponent from "@/components/Header.vue";
+import LoadingSpinner from "@/components/Loading.vue";
 
-export default {
-  name: 'HomePage',
-  components: {HeaderComponent},
-  setup() {
-    const launches = ref([]);
-    const loading = ref(true);
-    const error = ref<string | null>(null);
+const launches = ref([]);
+const loading = ref(true);
+const error = ref<string | null>(null);
 
-    const fetchUpcomingLaunches = async () => {
-      try {
-        const launchesData = await getUpcomingLaunches();
-        launches.value = launchesData.map((launch: any) => ({
-          ...launch,
-          date: formatDate(launch.date),
-        }));
-      } catch (e: any) {
-        error.value = e.message;
-      } finally {
-        loading.value = false;
-      }
-    };
-
-    onMounted(fetchUpcomingLaunches);
-
-    return {
-      launches,
-      loading,
-      error,
-    };
-  },
+const fetchUpcomingLaunches = async () => {
+  try {
+    const launchesData = await getUpcomingLaunches();
+    launches.value = launchesData.map((launch: any) => ({
+      ...launch,
+      date: formatDate(launch.date),
+    }));
+  } catch (e: any) {
+    error.value = e.message;
+  } finally {
+    loading.value = false;
+  }
 };
 
+onMounted(fetchUpcomingLaunches);
 </script>
 
 <style>

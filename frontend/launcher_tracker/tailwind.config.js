@@ -5,13 +5,22 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-              krona: ['Krona One', 'sans-serif'],
-              gowun: ['Gowun Batang', 'sans-serif'],
+                krona: ['Krona One', 'sans-serif'],
+                gowun: ['Gowun Batang', 'sans-serif'],
             },
             colors: {
                 dark: '#151515',
                 dark_card: '#222',
-            }
+            },
+            animation: {
+                spin: 'spin 1s linear infinite',
+            },
+            keyframes: {
+                spin: {
+                    from: {transform: 'rotate(0deg)'},
+                    to: {transform: 'rotate(360deg)'},
+                },
+            },
         },
     },
     variants: {
