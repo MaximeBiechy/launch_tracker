@@ -46,7 +46,7 @@ Launch Tracker est une application web full stack qui permet de répertorier tou
    Utilisez Docker Compose pour construire et exécuter l'application. Dans le terminal, exécutez :
 
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
    Cette commande va :
