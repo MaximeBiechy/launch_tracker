@@ -32,17 +32,17 @@ const handleApiError = (error: any) => {
     if (error.response) {
         const status = error.response.status;
         if (status === 429) {
-            throw new Error(`Error ${status}: ${error.response.data.message || 'Too many requests. Please try again later.'}`);
+            throw new Error(`Error ${error.response.data.message || 'Too many requests. Please try again later.'}`);
         } else if (status === 502) {
-            throw new Error(`${status} : The server is temporarily unavailable.`);
+            throw new Error(`Error ${error.respone.data.message || 'The server is temporarily unavailable.'}`);
         } else {
-            throw new Error(`Error ${status}: ${error.response.data.message || 'An error has occurred.'}`);
+            throw new Error(`Error ${error.response.data.message || 'An error has occurred.'}`);
         }
     } else if (error.request) {
         // ! Server error
         throw new Error(`Error : ${error.response.data.message || 'No response from the server. Please check your connection.'}`)
     } else {
         // ! Client error
-        throw new Error(`Error: ${error.message}`);
+        throw new Error(`Error : ${error.message}`);
     }
 };
