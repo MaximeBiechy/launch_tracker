@@ -1,4 +1,5 @@
 # Launch Tracker
+Ce projet n'est pas finit.
 
 ## Description
 
@@ -63,3 +64,12 @@ Launch Tracker est une application web full stack qui permet de répertorier tou
    ```
 
    Cela affichera votre application de suivi des lancements de fusées.
+
+## Images
+- Page d'accueil
+   
+![image](https://github.com/user-attachments/assets/759e0aa1-5af8-4c6e-a74a-a20cfe9d5ccb)
+- Details
+  
+![image](https://github.com/user-attachments/assets/5d0618a4-de71-4e3f-a907-1b7ed727bf4a)
+
